@@ -1,56 +1,44 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 import { saveDepartment } from "../../../actions/departmentActions";
-//import { editUserRegister } from "../../../actions/userActions";
-//import { getUser } from "../../../actions/userActions";
-//import { getActionToDo } from "../../../actions/userActions";
+import { editDepartment } from "../../../actions/departmentActions";
 
 class DepartmentRegister extends Component {
   state = {
     formState: "Registrar",
+    departmentId: "",
     department: "",
   };
 
-  componentDidMount() {}
-
-/*
   componentDidUpdate(prevProps) {
-    const { actionToDo } = this.props.user;
-    const { user } = this.props.user;
-    if (user !== prevProps.user.user) {
-      this.changeState(user);
-      //this.props.getActionToDo(false);
+    const { department } = this.props.department;
+    if (department !== prevProps.department.department) {
+      this.updateState(department);
+      this.changeForm();
     }
   }
 
-  //Esta función recibe los datos del ususario y actualiza el state con esos datos
-  changeState = (user) => {
+  updateState = (department) => {
     this.setState({
-      userId: user.idUsuario,
-      firstName: user.nombre,
-      lastName1: user.apellidoUno,
-      lastName2: user.apellidoDos,
-      email: user.email,
-      user: user.usuario,
-      password: user.contrasenia,
-      userComments: user.observacionesUsuario,
-      userState: user.estado,
+      departmentId: department.departmentId,
+      department: department.department,
     });
   };
-*/
+
+  changeForm = () => {
+    this.setState({
+      formState: "Modificar",
+    });
+  };
+
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-
-  
-  //handleClickClose = () => {
-  //  this.props.getActionToDo(false);
-  //};
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -58,32 +46,25 @@ class DepartmentRegister extends Component {
     const dataSave = {
       department: this.state.department,
     };
-/*
+
     const dataEdit = {
-      nombre: this.state.firstName,
-      apellidoUno: this.state.lastName1,
-      apellidoDos: this.state.lastName2,
-      email: this.state.email,
-      usuario: this.state.user,
-      contrasenia: this.state.password,
-      observacionesUsuario: this.state.userComments,
-      estatusUsuario: this.state.userState,
-      idUsuario: this.state.userId,
+      departmentId: this.state.departmentId,
+      department: this.state.department,
     };
 
-    const { actionToDo } = this.props.user;
-    if (actionToDo === false) {
-      this.props.saveUserRegister(dataSave);
+    if (this.state.departmentId === "") {
+      this.props.saveDepartment(dataSave);
     } else {
-      this.props.editUserRegister(dataEdit);
+      this.props.editDepartment(dataEdit);
     }
-*/
-    this.props.saveDepartment(dataSave);
+
     this.clearState();
   };
 
   clearState = () => {
     this.setState({
+      formState: "Registrar",
+      departmentId: "",
       department: "",
     });
   };
@@ -122,6 +103,7 @@ class DepartmentRegister extends Component {
 
 DepartmentRegister.propTypes = {
   saveDepartment: PropTypes.func.isRequired,
+  editDepartment: PropTypes.func.isRequired,
   department: PropTypes.object.isRequired,
 };
 
@@ -131,7 +113,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   saveDepartment,
-  //editUserRegister,
-  //getUser,
-  //getActionToDo,
+  editDepartment,
 })(withRouter(DepartmentRegister));

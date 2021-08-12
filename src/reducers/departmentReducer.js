@@ -2,6 +2,9 @@ import {
   GET_LIST_DEPARTMENTS,
   SAVE_DEPARTMENT,
   CHANGE_VERIFICATION,
+  SET_DEPARTMENT,
+  EDIT_DEPARTMENT,
+  DELETE_DEPARTMENT,
 } from "../actions/types.js";
 
 const isEmpty = require("is-empty");
@@ -10,7 +13,7 @@ const isEmpty = require("is-empty");
 const initialState = {
   departments: [],
   verification: false,
-  //role: {},
+  department: {},
 };
 
 export default function (state = initialState, action) {
@@ -27,6 +30,21 @@ export default function (state = initialState, action) {
         departments: action.payload,
       };
     case SAVE_DEPARTMENT:
+      return {
+        ...state,
+        verification: !isEmpty(action.payload),
+      };
+    case SET_DEPARTMENT:
+      return {
+        ...state,
+        department: action.payload,
+      };
+    case EDIT_DEPARTMENT:
+      return {
+        ...state,
+        verification: !isEmpty(action.payload),
+      };
+    case DELETE_DEPARTMENT:
       return {
         ...state,
         verification: !isEmpty(action.payload),

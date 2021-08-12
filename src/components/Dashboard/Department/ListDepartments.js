@@ -7,6 +7,8 @@ import { Table, Button } from "react-bootstrap";
 
 import { getListDepartments } from "../../../actions/departmentActions";
 import { changeVerification } from "../../../actions/departmentActions";
+import { setDepartment } from "../../../actions/departmentActions";
+import { deleteDepartment } from "../../../actions/departmentActions";
 
 class ListDepartments extends Component {
   componentDidMount() {
@@ -23,6 +25,19 @@ class ListDepartments extends Component {
 
   getDepartments = () => {
     this.props.getListDepartments();
+  };
+
+  handleClickEdit = (departmentId, department) => {
+    const data = {
+      departmentId,
+      department,
+    };
+    //console.log(data);
+    this.props.setDepartment(data);
+  };
+
+  handleClickDelete = (departmentId) => {
+    this.props.deleteDepartment(departmentId);
   };
 
   render() {
@@ -48,10 +63,25 @@ class ListDepartments extends Component {
                 <td>{department.department}</td>
                 <td>{department.state}</td>
                 <td>
-                  <Button variant="outline-primary">Editar</Button>{" "}
-                  <Link to="#" className="btn btn-outline-primary">
+                  <Button
+                    variant="outline-primary"
+                    onClick={() =>
+                      this.handleClickEdit(
+                        department.departmentId,
+                        department.department
+                      )
+                    }
+                  >
+                    Editar
+                  </Button>{" "}
+                  <Button
+                    variant="outline-primary"
+                    onClick={() =>
+                      this.handleClickDelete(department.departmentId)
+                    }
+                  >
                     Eliminar
-                  </Link>
+                  </Button>
                 </td>
               </tr>
             ))}
@@ -65,6 +95,8 @@ class ListDepartments extends Component {
 ListDepartments.propTypes = {
   getListDepartments: PropTypes.func.isRequired,
   changeVerification: PropTypes.func.isRequired,
+  setDepartment: PropTypes.func.isRequired,
+  deleteDepartment: PropTypes.func.isRequired,
   department: PropTypes.object.isRequired,
 };
 
@@ -75,4 +107,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getListDepartments,
   changeVerification,
+  setDepartment,
+  deleteDepartment,
 })(withRouter(ListDepartments));
