@@ -6,19 +6,21 @@ import { connect } from "react-redux";
 import { Table, Button } from "react-bootstrap";
 
 import { getListDepartments } from "../../../actions/departmentActions";
+import { changeVerification } from "../../../actions/departmentActions";
 
 class ListDepartments extends Component {
   componentDidMount() {
     this.getDepartments();
   }
-/*
+
   componentDidUpdate(prevProps) {
-    const { listRolesByRole } = this.props.role;
-    if (listRolesByRole === prevProps.role.listRolesByRole) {
-      this.getListRole();
+    const { verification } = this.props.department;
+    if (verification !== prevProps.department.verification) {
+      this.getDepartments();
+      this.props.changeVerification(false);
     }
   }
-*/
+
   getDepartments = () => {
     this.props.getListDepartments();
   };
@@ -35,15 +37,7 @@ class ListDepartments extends Component {
               <th>Id Departamento</th>
               <th>Departamento</th>
               <th>Estado</th>
-              <th>
-                Acciones{" "}
-                <Link
-                  to="#"
-                  className="btn btn-outline-primary"
-                >
-                  Agregar
-                </Link>
-              </th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -54,15 +48,8 @@ class ListDepartments extends Component {
                 <td>{department.department}</td>
                 <td>{department.state}</td>
                 <td>
-                  <Button
-                    variant="outline-primary"
-                  >
-                    Editar
-                  </Button>{" "}
-                  <Link
-                    to="#"
-                    className="btn btn-outline-primary"
-                  >
+                  <Button variant="outline-primary">Editar</Button>{" "}
+                  <Link to="#" className="btn btn-outline-primary">
                     Eliminar
                   </Link>
                 </td>
@@ -77,6 +64,7 @@ class ListDepartments extends Component {
 
 ListDepartments.propTypes = {
   getListDepartments: PropTypes.func.isRequired,
+  changeVerification: PropTypes.func.isRequired,
   department: PropTypes.object.isRequired,
 };
 
@@ -86,4 +74,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getListDepartments,
+  changeVerification,
 })(withRouter(ListDepartments));
