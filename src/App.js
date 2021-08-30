@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 
-import Landing from "./components/Layout/Landing";
+import Navigation from "./components/layout/Navbar/Navigation";
+import Landing from "./components/layout/Landing";
 
 import "./App.css";
 
@@ -14,6 +15,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <>
+          <Navigation />
           <Route exact path="/" component={Landing} />
           </>
         </Router>
