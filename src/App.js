@@ -6,6 +6,7 @@ import store from "./store";
 
 import Navigation from "./components/layout/Navbar/Navigation";
 import Landing from "./components/layout/Landing";
+import DepartmentsAdmin from "./components/dashboard/Department/DepartmentsAdmin";
 import CategoriesAdmin from "./components/dashboard/Category/CategoriesAdmin";
 
 import "./App.css";
@@ -19,6 +20,11 @@ class App extends Component {
             <Navigation />
             <Route exact path="/" component={Landing} />
             <Switch>
+              <Route
+                exact
+                path="/dashboard/administrator/departments-administration"
+                component={DepartmentsAdmin}
+              />
               <Route
                 exact
                 path="/dashboard/administrator/categories-administration"

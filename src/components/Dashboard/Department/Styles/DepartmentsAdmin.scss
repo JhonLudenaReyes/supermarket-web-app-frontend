@@ -1,0 +1,14 @@
+.departmentContainer {
+  margin-top: 30px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  & .listDepartment {
+    grid-column: 1;
+  }
+
+  & .DepartmentRegister {
+    grid-column: 2;
+  }
+}
