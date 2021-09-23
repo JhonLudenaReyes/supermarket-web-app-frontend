@@ -9,17 +9,17 @@ import "./Styles/AuthNavbar.css";
 class AuthNavbar extends Component {
   render() {
     return (
-      <Container>
-        <Nav className="mr-auto">
-          <Link
-            className="Link"
-            to="/dashboard/administrator/categories-administration"
-            style={{ color: "gray", textDecoration: "inherit" }}
-          >
-            <b>Categoria</b>
-          </Link>
-        </Nav>
-      </Container>
+      <Nav className="me-auto">
+        <Nav.Link href="#/dashboard/administrator/categories-administration">
+          Categoria
+        </Nav.Link>
+        <Link
+          className="Link"
+          to="/dashboard/administrator/categories-administration"
+        >
+          Categoria
+        </Link>
+      </Nav>
     );
   }
 }
