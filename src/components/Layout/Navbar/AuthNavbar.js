@@ -17,6 +17,12 @@ class AuthNavbar extends Component {
           className="Link"
           to="/dashboard/administrator/categories-administration"
         >
+          Departamento
+        </Link>
+        <Link
+          className="Link"
+          to="/dashboard/administrator/categories-administration"
+        >
           Categoria
         </Link>
       </Nav>
